@@ -1,0 +1,402 @@
+---
+title: Methods 4
+author: John Dong
+format: pdf
+---
+
+```{r}
+#| label: setup
+#| echo: FALSE
+#| include: FALSE
+
+library(tidyverse)
+library(survey)
+```
+# Problem 1
+
+### a.
+
+The number of words on each page are as follows:
+- $M_1 = 60$
+
+- $M_2 = 69$
+
+- $M_3 = 73$
+
+- $M_4 = 56$
+ 
+- $M_5 = 48$
+
+- $M_6 = 43$
+
+- $M_7 = 52$
+
+- $M_8 = 76$
+
+- $M_9 = 50$
+
+- $M_{10} = 57$
+
+- Meaning, the sampling weights would be $\frac{1331}{10}\frac{M_i}{20}$ for each word in each $i^{th}$ cluster. 
+
+### b.
+
+$m_i = 20$, meaning we take a random sample of 20 words from each page. No page has a number of words, $M_i$, exceeding 20, so we don't have to adjust $m_i$ to be smaller for any pages. 
+
+One way to randomly sample each page is to index the words on each page by counting them in order. Then, sampling 20 numbers from $\left\{1, 2, 3, ..., M_i\right\}$.
+
+In base R, this would look like:
+
+```{r}
+#| label: 1-b
+
+set.seed(0)
+M_i = c(60, 69, 73, 56, 48, 43, 52, 76, 50, 57)
+
+table = matrix(nrow = 0, ncol = 20)
+
+for (i in seq_along(M_i)) {
+  row = sample(seq(M_i[i]), 20)
+  table = rbind(table, row)
+}
+
+table = as.data.frame(table)
+table
+
+```
+
+where row $i$ represents the indices of the words sampled for the $i^{th}$ cluster.
+
+### c.
+My results for how many words I knew:
+
+- Page 45: 13
+- Page 563: 12
+- Page 825: 15
+- Page 122: 10
+- Page 341: 11
+- Page 177: 13
+- Page 1354: 13
+- Page 553: 12
+- Page 600: 15
+- Page 586: 13
+
+```{r}
+#| label: 1-c
+
+know_count = c(13, 12, 15,10, 11, 13, 13, 12, 15, 13)
+data = data.frame()
+
+for (i in seq_along(M_i)) {
+  row = data.frame(
+    page = i,
+    know = c(rep(1, know_count[i]), rep(0, 20 - know_count[i])),
+    M_i = M_i[i]
+  )
+  data = rbind(data, row)
+}
+rownames(data) = NULL
+data
+
+```
+
+```{r}
+#| label: 1-c-des
+data$wt = (1331/10)*(data$M_i/20) #from part a
+data$N = 1331
+
+des1 = svydesign(~page + know, weights = ~wt, fpc = ~ N + M_i, data = data)
+```
+
+By using two-stage cluster samplings, we have to pass multiple parameters so that R knows what to look at. In order to tell R to know that we are first sampling pages, we pass the "page" column as our largest cluster id, which says which sampled words belong to which cluster/page, and N (total number of pages) as our first fpc. Then, for our next id, we pass "words", as our second id parameter so that R knows to know we are sampling words within each page. Then, we need to specify our second fpc, M_i, the total number of words on each page.
+
+As for weights, we know that conceptually, two-stage cluster sampling consists of a random sample of $n$ clusters, and within each of those clusters, there is some number of records sampled $m_i$ among the cluster total $M_i$. This gives us the sampling probability $\pi_{ij} = \frac{n}{N} \frac{m_i}{M_i}$, or a weight of $\frac{N}{n} \frac{M_i}{m_i}$, subbing 1331 pages for $N$, 10 pages for $n$, respective words-per-page totals for $M_i$, and 20 for $m_i$.
+
+### d.
+
+```{r}
+#| label: 1-d
+total_know = svytotal(~know, des1)
+
+total_know
+```
+
+Estimated to know a total of **49,440** words with a standard error of 3937.1.
+
+### e. 
+
+```{r}
+#| label: 1-e
+know_pp = svytotal(~know, des1)/ 1331
+
+
+know_pp
+SE(total_know)/ 1331
+
+```
+
+Estimated to know **37** words per page with a standard error of 2.96.
+
+### f. 
+
+```{r}
+#| label: 1-f
+
+perc_know = svymean(~know, des1) * 100
+
+perc_know
+
+```
+
+Estimated to know **63.6%** of words in the dictionary with a standard error of 2.8%.
+
+# 2.
+
+### a.
+
+Jacoby and Handlin "selected 26 from a list of 1285 scholarly journals" and "examined all articles" for the selected journals. One record for this survey is represented by an article, and a scholarly journal is a compilation of several articles. Thus, by collecting articles by how they are naturally grouped in journals makes the journals natural **clusters**, and all articles in each journal is examined, making it akin to **one-stage cluster sampling**.
+
+
+### b. 
+
+```{r}
+#| label: 2b
+
+# used image of csv from Canvas to feed into Duke GPT for data.frame() arguments
+journal = data.frame(
+  journal_id = 1:26,
+  numemp = c(
+    17, 1, 3, 3, 23, 3, 18, 1, 0, 5, 0, 0, 13,
+    0, 0, 0, 0, 46, 3, 5, 2, 0, 0, 1, 4, 0
+  ),
+  prob = c(
+    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0
+  ),
+  nonprob = c(
+    17, 1, 3, 2, 19, 3, 16, 1, 0, 4, 0, 0, 13,
+    0, 0, 0, 0, 46, 3, 5, 1, 0, 0, 1, 2, 0
+  )
+)
+
+journal$N = 1285
+journal$n = 26
+journal$wt = (journal$N / journal$n)
+
+des2 = svydesign(~journal_id, weights = ~wt, fpc = ~N,data = journal) #only one id and fpc parameter because this is one stage cluster
+
+non_prob_prop <- svyratio(numerator = ~nonprob, denominator = ~numemp, design = des2)
+
+non_prob_prop
+SE(non_prob_prop)
+
+```
+
+### c. 
+
+This statement is misleading because it makes some false assumptions about the population being sampled from. We are told are sample comes from a list of 1285 scholarly journals containing articles in the social and behavioral sciences. Therefore, the proportion we calculated describes the proportion of social and behavioral sciences that are published in a scholarly journal and use nonprobability sampling. 
+
+However, the statement goes on to use the estimated proportion to claim that this means that nonprobability is common enough for courts to have no problem with it being used. While it is likely for the majority of articles in social/behavioral science journals to use nonprobability sampling, this is a specific subdomain of articles. Additionally, social and behavioral sciences fundamentally rely more on voluntary participation, which would mean that these journals can disproportionally be more reliant on nonprobability sampling. We also don't know if these articles are credible enough to be presented in court. A scholarly study can still be released in a journal, but then be deemed outdated or inaccurate later on. A stronger argument could be made if the articles were sampled from a population of articles deemed suitable for litigation by some outside metric, and if the sample wasn't restricted to one field of study.
+
+# 3. 
+
+### a.
+
+Recall:
+
+$$
+Var(\hat{t_y}) = \frac{N^2(1-\frac{n}{N})S_{(t)}^2}{n}
+$$
+
+
+$$
+\text{where } S_{(t)}^2 = \sum_{i=1}^{N}\frac{(t_{yi}-\bar{T}_y)^2}{N-1} 
+$$
+
+```{r}
+#| label: 3a
+
+hypo = read.csv("~/sta322_methods4/data/HypotheticalClusterPopulation.csv")
+
+# T bar
+hypo |> summarize(T_bar = sum(y)/3)
+
+# t_1
+hypo |> filter(cluster == 1) |> summarize(sum = sum(y))
+
+# t_2
+hypo |> filter(cluster == 2) |> summarize(sum = sum(y))
+
+# t_3
+hypo |> filter(cluster == 3) |> summarize(sum = sum(y))
+
+```
+
+$$
+S_{(t)}^2 = \sum_{i=1}^{3}\frac{(t_{yi}-1581)^2}{3-1} 
+$$
+
+$$
+S_{(t)}^2 = \frac{(29-1581)^2}{2} +  \frac{(648-1581)^2}{2} +  \frac{(4066-1581)^2}{2} \\
+$$
+```{r}
+#| label: 3-a-compute-S
+
+(((29-1581)^2)/2) + (((648-1581)^2)/2) + (((4066-1581)^2)/2)
+```
+
+$$
+S_{(t)}^2 = 4,727,209 
+$$
+
+$$
+Var(\hat{t_y}) = \frac{N^2(1-\frac{n}{N})S_{(t)}^2}{n} 
+$$
+
+$$
+Var(\hat{t_y}) = 3^2(1-\frac{1}{3})4727209^2
+$$
+
+
+
+```{r}
+#| label: 3-a-compute-var
+
+(9*2/3)*(4727209)
+```
+
+$$
+Var(\hat{t_y}) = 28,363,254
+$$
+
+### b.
+
+$$
+Var(\hat{t_y}) = \frac{N^2(1-\frac{n}{N})S^2}{n} 
+$$
+
+$$
+Var(\hat{t_y}) = \frac{30^2 (1- \frac{10}{30})S^2}{10} 
+$$
+
+$$
+S^2 = \frac{1}{N-1}\sum_{i=1}^{N}(y_i-\bar{Y})^2 
+$$
+
+```{r}
+#| label: 3b-compute-S
+
+hypo = hypo |> mutate(Y_bar = sum(y)/30) |> mutate(diff = (y-Y_bar)^2)
+hypo 
+hypo |> summarize(S_2 = sum(diff)/29)
+
+
+```
+
+$$
+S^2 = \frac{1}{29}\sum_{i=1}^{30}(y_i-158.1)^2 
+$$
+
+$$
+S^2 = 32610.58 
+$$
+
+$$
+Var(\hat{t_y}) = \frac{30^2 (1- \frac{10}{30})(32610.58)}{10}
+$$
+
+```{r}
+#| label: 3b-compute-var
+
+(30^2)*(2/3)*(32610.58)/10
+```
+
+$$
+Var(\hat{t_y}) = 1,956,635
+$$
+
+
+### c.
+
+The variance for the H-T estimator in the cluster sample is much greater because in our data, we can observe that each cluster each have a range of values that then vary drastically from the other clusters. This means that, when we get our estimator only using $n=1$, i.e. only estimating the total from one cluster, we miss out on a majority of the range of $y$.
+
+This is different from the SRS model because, with SRS, the random process gives us a decent chance of collecting data from each cluster, while not guaranteed but much better than missing out on most clusters entirely. 
+
+Then, we can see how this is represented by looking at what is different between the two $S^2$ formulas. In the cluster sample, we see that $S^2$ has a much greater magnitude when the cluster totals deviate far from the average cluster totals, which is going to inevitably happen for this data because our clusters have egregious differences between their respective ranges of $y$.
+
+### d. 
+
+For each cluster, the finite population variance
+
+$$
+S_h^2=\frac{1}{N_h-1}\sum_{i=1}^{N_h}(y_{hi}-\bar{Y}_h)^2, \text{where} 
+$$
+
+$$
+\bar{Y}_h=\frac{1}{N_h}\sum_{i=1}^{N_h} y_{hi}
+$$
+
+So, first we compute our finite population variances:
+
+
+```{r}
+#| label: 3d-s-2
+
+fin_pop_var = hypo |> group_by(cluster) |> mutate(strat_avg = mean(y)) |> summarize(strat_var = sum(((y - mean(y))^2)/9)) |> select(cluster, strat_var)
+
+fin_pop_var
+```
+
+Using formula, $Var(\hat{t_y}) = \sum_{h = 1}^{H} N_h^2 (1 - \frac{n_h}{N_h})\frac{S_h^2}{n_h}$,
+
+
+$$
+Var(\hat{t_y}) = \sum_{h = 1}^{3} 10^2 (1 - \frac{3}{10})\frac{S_h^2}{3} 
+= 10^2 (1 - \frac{3}{10})\frac{1.4\bar{3}}{3}  + 10^2 (1 - \frac{3}{10})\frac{16.1\bar{7}}{3}  + 10^2 (1 - \frac{3}{10})\frac{11.8\bar{2}}{3} 
+$$
+
+```{r}
+#| label: 3d-var
+fin_pop_var |> summarize(var = sum((70/3)*(strat_var)))
+
+```
+$$
+Var(\hat{t_y}) = 686.\bar{7}
+$$
+### e.
+
+Our population consists of these three equally sized groups, called clusters, that are densely concentrated at 3 points. The first cluster's y values are centered around ~3, the second around ~65, and the third around ~407. Each cluster's y values are spaced far apart from each other, meaning that the total population has a wide variety of y values. However, if we want to make more consistent estimates of the total value for y in the population, we can use the fact that each of the groupings of y are consistently centered around a value. If we take a small sample from each group, we are more likely to get similar totals from each group to then estimate our population total. This is different than if we were to neglect the groupings, because then we would be assuming that the groups are similar when they are actually very different.
+
+# 4.
+
+When comparing the correct theoretical formula, 
+$$
+Var(\hat{t_y}) = \frac{N^2(1-\frac{n}{N})S_{(t)}^2}{n}; 
+$$
+
+$$
+\text{where } S_{(t)}^2 = \sum_{i=1}^{N}\frac{(t_{yi}-\bar{T}_y)^2}{N-1} 
+$$
+or--
+$$
+Var(\hat{t_y}) = \frac{3^2(1-\frac{1}{3})S_{(t)}^2}{1}; 
+$$
+
+$$
+\text{where } S_{(t)}^2 = \sum_{i=1}^{3}\frac{(\sum_{j=1}^{10}y_{ij} -\frac{1}{3}\sum_{i,j \in S}y_{ij})^2}{3-1} 
+$$
+to the friend's estimated variance
+$$
+\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})s^2}{10}
+$$
+we know that the friend will consistently have an underestimate of the variance. This is because their $s^2$'s estimates are calculated using only the data collected from sampling one cluster. However, as we already established, the clusters are drastically different and have largely varying totals between them. Therefore, the friend is missing any variance between clusters, which was the main contributor to our theoretical variance.
+
+We can confirm this by checking the different possibilities for the friend's variance estimates using our within-cluster variances from before:
+
+- Cluster 1: $\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})1.43}{10} = 86$
+- Cluster 2: $\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})16.17}{10} = 970$
+- Cluster 3: $\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})11.82}{10} = 709.\bar{3}$,
+
+which are all egregiously under our theoretical variance.
+
+# 5.

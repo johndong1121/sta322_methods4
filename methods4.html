@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John Dong">
+
+<title>Methods 4</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="methods4_files/libs/clipboard/clipboard.min.js"></script>
+<script src="methods4_files/libs/quarto-html/quarto.js"></script>
+<script src="methods4_files/libs/quarto-html/popper.min.js"></script>
+<script src="methods4_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="methods4_files/libs/quarto-html/anchor.min.js"></script>
+<link href="methods4_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="methods4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="methods4_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="methods4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="methods4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Methods 4</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>John Dong </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="problem-1" class="level1">
+<h1>Problem 1</h1>
+<section id="a." class="level3">
+<h3 class="anchored" data-anchor-id="a.">a.</h3>
+<p>The number of words on each page are as follows: - <span class="math inline">\(M_1 = 60\)</span></p>
+<ul>
+<li><p><span class="math inline">\(M_2 = 69\)</span></p></li>
+<li><p><span class="math inline">\(M_3 = 73\)</span></p></li>
+<li><p><span class="math inline">\(M_4 = 56\)</span></p></li>
+<li><p><span class="math inline">\(M_5 = 48\)</span></p></li>
+<li><p><span class="math inline">\(M_6 = 43\)</span></p></li>
+<li><p><span class="math inline">\(M_7 = 52\)</span></p></li>
+<li><p><span class="math inline">\(M_8 = 76\)</span></p></li>
+<li><p><span class="math inline">\(M_9 = 50\)</span></p></li>
+<li><p><span class="math inline">\(M_{10} = 57\)</span></p></li>
+<li><p>Meaning, the sampling weights would be <span class="math inline">\(\frac{1331}{10}\frac{M_i}{20}\)</span> for each word in each <span class="math inline">\(i^{th}\)</span> cluster.</p></li>
+</ul>
+</section>
+<section id="b." class="level3">
+<h3 class="anchored" data-anchor-id="b.">b.</h3>
+<p><span class="math inline">\(m_i = 20\)</span>, meaning we take a random sample of 20 words from each page. No page has a number of words, <span class="math inline">\(M_i\)</span>, exceeding 20, so we don’t have to adjust <span class="math inline">\(m_i\)</span> to be smaller for any pages.</p>
+<p>One way to randomly sample each page is to index the words on each page by counting them in order. Then, sampling 20 numbers from <span class="math inline">\(\left\{1, 2, 3, ..., M_i\right\}\)</span>.</p>
+<p>In base R, this would look like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>M_i <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">69</span>, <span class="dv">73</span>, <span class="dv">56</span>, <span class="dv">48</span>, <span class="dv">43</span>, <span class="dv">52</span>, <span class="dv">76</span>, <span class="dv">50</span>, <span class="dv">57</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>table <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">0</span>, <span class="at">ncol =</span> <span class="dv">20</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(M_i)) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  row <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">seq</span>(M_i[i]), <span class="dv">20</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">=</span> <span class="fu">rbind</span>(table, row)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>table <span class="ot">=</span> <span class="fu">as.data.frame</span>(table)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20
+row   14 57  4 39  1 34 23 43 60  18  33  21  49  42  46  10   7   9  15  48
+row.1 37 69 34 44 33 20 35  6 10  42  38  47  64  28  57  66  23  62  40  54
+row.2 25 70 39 51 42  6 24 32 14   2  45  18  22  65  38   1  72  57  40  68
+row.3 23 44  6 40 39 11 17 36 13  53  25  46  56  20  52  29  48  22  41  28
+row.4 44 33 45 21 31 38 17  9 39  23  19  26  30  32  29  10   1  11  27  37
+row.5 15 29 24 12 39 41 28 22 33  19  26   3  11   1  42  14  36   6  20   9
+row.6 37 46 49  3 22 35  7 47 44  41  27  51  20  24  16  19  36   2   1  13
+row.7 66 19 17 34 31 35 46 75 16  40   9  50  28  58  24  10  15   3  37  57
+row.8 32 37 39 31 49 29 12 14 38  16  15   2   1   3   9  17  20   5  36  27
+row.9 44 31 53  8 36 49 41 29 21   1  20  42  46  24  22  38  16  30  50   2</code></pre>
+</div>
+</div>
+<p>where row <span class="math inline">\(i\)</span> represents the indices of the words sampled for the <span class="math inline">\(i^{th}\)</span> cluster.</p>
+</section>
+<section id="c." class="level3">
+<h3 class="anchored" data-anchor-id="c.">c.</h3>
+<p>My results for how many words I knew:</p>
+<ul>
+<li>Page 45: 13</li>
+<li>Page 563: 12</li>
+<li>Page 825: 15</li>
+<li>Page 122: 10</li>
+<li>Page 341: 11</li>
+<li>Page 177: 13</li>
+<li>Page 1354: 13</li>
+<li>Page 553: 12</li>
+<li>Page 600: 15</li>
+<li>Page 586: 13</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>know_count <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">15</span>,<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">13</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(M_i)) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  row <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">page =</span> i,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">know =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, know_count[i]), <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">20</span> <span class="sc">-</span> know_count[i])),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_i =</span> M_i[i]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">=</span> <span class="fu">rbind</span>(data, row)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    page know M_i
+1      1    1  60
+2      1    1  60
+3      1    1  60
+4      1    1  60
+5      1    1  60
+6      1    1  60
+7      1    1  60
+8      1    1  60
+9      1    1  60
+10     1    1  60
+11     1    1  60
+12     1    1  60
+13     1    1  60
+14     1    0  60
+15     1    0  60
+16     1    0  60
+17     1    0  60
+18     1    0  60
+19     1    0  60
+20     1    0  60
+21     2    1  69
+22     2    1  69
+23     2    1  69
+24     2    1  69
+25     2    1  69
+26     2    1  69
+27     2    1  69
+28     2    1  69
+29     2    1  69
+30     2    1  69
+31     2    1  69
+32     2    1  69
+33     2    0  69
+34     2    0  69
+35     2    0  69
+36     2    0  69
+37     2    0  69
+38     2    0  69
+39     2    0  69
+40     2    0  69
+41     3    1  73
+42     3    1  73
+43     3    1  73
+44     3    1  73
+45     3    1  73
+46     3    1  73
+47     3    1  73
+48     3    1  73
+49     3    1  73
+50     3    1  73
+51     3    1  73
+52     3    1  73
+53     3    1  73
+54     3    1  73
+55     3    1  73
+56     3    0  73
+57     3    0  73
+58     3    0  73
+59     3    0  73
+60     3    0  73
+61     4    1  56
+62     4    1  56
+63     4    1  56
+64     4    1  56
+65     4    1  56
+66     4    1  56
+67     4    1  56
+68     4    1  56
+69     4    1  56
+70     4    1  56
+71     4    0  56
+72     4    0  56
+73     4    0  56
+74     4    0  56
+75     4    0  56
+76     4    0  56
+77     4    0  56
+78     4    0  56
+79     4    0  56
+80     4    0  56
+81     5    1  48
+82     5    1  48
+83     5    1  48
+84     5    1  48
+85     5    1  48
+86     5    1  48
+87     5    1  48
+88     5    1  48
+89     5    1  48
+90     5    1  48
+91     5    1  48
+92     5    0  48
+93     5    0  48
+94     5    0  48
+95     5    0  48
+96     5    0  48
+97     5    0  48
+98     5    0  48
+99     5    0  48
+100    5    0  48
+101    6    1  43
+102    6    1  43
+103    6    1  43
+104    6    1  43
+105    6    1  43
+106    6    1  43
+107    6    1  43
+108    6    1  43
+109    6    1  43
+110    6    1  43
+111    6    1  43
+112    6    1  43
+113    6    1  43
+114    6    0  43
+115    6    0  43
+116    6    0  43
+117    6    0  43
+118    6    0  43
+119    6    0  43
+120    6    0  43
+121    7    1  52
+122    7    1  52
+123    7    1  52
+124    7    1  52
+125    7    1  52
+126    7    1  52
+127    7    1  52
+128    7    1  52
+129    7    1  52
+130    7    1  52
+131    7    1  52
+132    7    1  52
+133    7    1  52
+134    7    0  52
+135    7    0  52
+136    7    0  52
+137    7    0  52
+138    7    0  52
+139    7    0  52
+140    7    0  52
+141    8    1  76
+142    8    1  76
+143    8    1  76
+144    8    1  76
+145    8    1  76
+146    8    1  76
+147    8    1  76
+148    8    1  76
+149    8    1  76
+150    8    1  76
+151    8    1  76
+152    8    1  76
+153    8    0  76
+154    8    0  76
+155    8    0  76
+156    8    0  76
+157    8    0  76
+158    8    0  76
+159    8    0  76
+160    8    0  76
+161    9    1  50
+162    9    1  50
+163    9    1  50
+164    9    1  50
+165    9    1  50
+166    9    1  50
+167    9    1  50
+168    9    1  50
+169    9    1  50
+170    9    1  50
+171    9    1  50
+172    9    1  50
+173    9    1  50
+174    9    1  50
+175    9    1  50
+176    9    0  50
+177    9    0  50
+178    9    0  50
+179    9    0  50
+180    9    0  50
+181   10    1  57
+182   10    1  57
+183   10    1  57
+184   10    1  57
+185   10    1  57
+186   10    1  57
+187   10    1  57
+188   10    1  57
+189   10    1  57
+190   10    1  57
+191   10    1  57
+192   10    1  57
+193   10    1  57
+194   10    0  57
+195   10    0  57
+196   10    0  57
+197   10    0  57
+198   10    0  57
+199   10    0  57
+200   10    0  57</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>wt <span class="ot">=</span> (<span class="dv">1331</span><span class="sc">/</span><span class="dv">10</span>)<span class="sc">*</span>(data<span class="sc">$</span>M_i<span class="sc">/</span><span class="dv">20</span>) <span class="co">#from part a</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>N <span class="ot">=</span> <span class="dv">1331</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>des1 <span class="ot">=</span> <span class="fu">svydesign</span>(<span class="sc">~</span>page <span class="sc">+</span> know, <span class="at">weights =</span> <span class="sc">~</span>wt, <span class="at">fpc =</span> <span class="sc">~</span> N <span class="sc">+</span> M_i, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>By using two-stage cluster samplings, we have to pass multiple parameters so that R knows what to look at. In order to tell R to know that we are first sampling pages, we pass the “page” column as our largest cluster id, which says which sampled words belong to which cluster/page, and N (total number of pages) as our first fpc. Then, for our next id, we pass “words”, as our second id parameter so that R knows to know we are sampling words within each page. Then, we need to specify our second fpc, M_i, the total number of words on each page.</p>
+<p>As for weights, we know that conceptually, two-stage cluster sampling consists of a random sample of <span class="math inline">\(n\)</span> clusters, and within each of those clusters, there is some number of records sampled <span class="math inline">\(m_i\)</span> among the cluster total <span class="math inline">\(M_i\)</span>. This gives us the sampling probability <span class="math inline">\(\pi_{ij} = \frac{n}{N} \frac{m_i}{M_i}\)</span>, or a weight of <span class="math inline">\(\frac{N}{n} \frac{M_i}{m_i}\)</span>, subbing 1331 pages for <span class="math inline">\(N\)</span>, 10 pages for <span class="math inline">\(n\)</span>, respective words-per-page totals for <span class="math inline">\(M_i\)</span>, and 20 for <span class="math inline">\(m_i\)</span>.</p>
+</section>
+<section id="d." class="level3">
+<h3 class="anchored" data-anchor-id="d.">d.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>total_know <span class="ot">=</span> <span class="fu">svytotal</span>(<span class="sc">~</span>know, des1)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>total_know</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     total     SE
+know 49440 3937.1</code></pre>
+</div>
+</div>
+<p>Estimated to know a total of <strong>49,440</strong> words with a standard error of 3937.1.</p>
+</section>
+<section id="e." class="level3">
+<h3 class="anchored" data-anchor-id="e.">e.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>know_pp <span class="ot">=</span> <span class="fu">svytotal</span>(<span class="sc">~</span>know, des1)<span class="sc">/</span> <span class="dv">1331</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>know_pp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      total     SE
+know 37.145 3937.1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SE</span>(total_know)<span class="sc">/</span> <span class="dv">1331</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         know
+know 2.957966</code></pre>
+</div>
+</div>
+<p>Estimated to know <strong>37</strong> words per page with a standard error of 2.96.</p>
+</section>
+<section id="f." class="level3">
+<h3 class="anchored" data-anchor-id="f.">f.&nbsp;</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>perc_know <span class="ot">=</span> <span class="fu">svymean</span>(<span class="sc">~</span>know, des1) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>perc_know</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       mean    SE
+know 63.604 0.028</code></pre>
+</div>
+</div>
+<p>Estimated to know <strong>63.6%</strong> of words in the dictionary with a standard error of 2.8%.</p>
+</section>
+</section>
+<section id="section" class="level1">
+<h1>2.</h1>
+<section id="a.-1" class="level3">
+<h3 class="anchored" data-anchor-id="a.-1">a.</h3>
+<p>Jacoby and Handlin “selected 26 from a list of 1285 scholarly journals” and “examined all articles” for the selected journals. One record for this survey is represented by an article, and a scholarly journal is a compilation of several articles. Thus, by collecting articles by how they are naturally grouped in journals makes the journals natural <strong>clusters</strong>, and all articles in each journal is examined, making it akin to <strong>one-stage cluster sampling</strong>.</p>
+</section>
+<section id="b.-1" class="level3">
+<h3 class="anchored" data-anchor-id="b.-1">b.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># used image of csv from Canvas to feed into Duke GPT for data.frame() arguments</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>journal <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">journal_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">numemp =</span> <span class="fu">c</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">17</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">23</span>, <span class="dv">3</span>, <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">13</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">46</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">0</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fu">c</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">nonprob =</span> <span class="fu">c</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">17</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">19</span>, <span class="dv">3</span>, <span class="dv">16</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">13</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">46</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>journal<span class="sc">$</span>N <span class="ot">=</span> <span class="dv">1285</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>journal<span class="sc">$</span>n <span class="ot">=</span> <span class="dv">26</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>journal<span class="sc">$</span>wt <span class="ot">=</span> (journal<span class="sc">$</span>N <span class="sc">/</span> journal<span class="sc">$</span>n)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>des2 <span class="ot">=</span> <span class="fu">svydesign</span>(<span class="sc">~</span>journal_id, <span class="at">weights =</span> <span class="sc">~</span>wt, <span class="at">fpc =</span> <span class="sc">~</span>N,<span class="at">data =</span> journal) <span class="co">#only one id and fpc parameter because this is one stage cluster</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>non_prob_prop <span class="ot">&lt;-</span> <span class="fu">svyratio</span>(<span class="at">numerator =</span> <span class="sc">~</span>nonprob, <span class="at">denominator =</span> <span class="sc">~</span>numemp, <span class="at">design =</span> des2)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>non_prob_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ratio estimator: svyratio.survey.design2(numerator = ~nonprob, denominator = ~numemp, 
+    design = des2)
+Ratios=
+           numemp
+nonprob 0.9256757
+SEs=
+            numemp
+nonprob 0.03398672</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SE</span>(non_prob_prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nonprob/numemp 
+    0.03398672 </code></pre>
+</div>
+</div>
+</section>
+<section id="c.-1" class="level3">
+<h3 class="anchored" data-anchor-id="c.-1">c.&nbsp;</h3>
+<p>This statement is misleading because it makes some false assumptions about the population being sampled from. We are told are sample comes from a list of 1285 scholarly journals containing articles in the social and behavioral sciences. Therefore, the proportion we calculated describes the proportion of social and behavioral sciences that are published in a scholarly journal and use nonprobability sampling.</p>
+<p>However, the statement goes on to use the estimated proportion to claim that this means that nonprobability is common enough for courts to have no problem with it being used. While it is likely for the majority of articles in social/behavioral science journals to use nonprobability sampling, this is a specific subdomain of articles. Additionally, social and behavioral sciences fundamentally rely more on voluntary participation, which would mean that these journals can disproportionally be more reliant on nonprobability sampling. We also don’t know if these articles are credible enough to be presented in court. A scholarly study can still be released in a journal, but then be deemed outdated or inaccurate later on. A stronger argument could be made if the articles were sampled from a population of articles deemed suitable for litigation by some outside metric, and if the sample wasn’t restricted to one field of study.</p>
+</section>
+</section>
+<section id="section-1" class="level1">
+<h1>3.</h1>
+<section id="a.-2" class="level3">
+<h3 class="anchored" data-anchor-id="a.-2">a.</h3>
+<p>Recall:</p>
+<p>$$</p>
+<p>Var() = ; \\</p>
+<p> S_{(t)}^2 = _{i=1}^{N}</p>
+<p>$$</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>hypo <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"~/sta322_methods4/data/HypotheticalClusterPopulation.csv"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># T bar</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>hypo <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">T_bar =</span> <span class="fu">sum</span>(y)<span class="sc">/</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  T_bar
+1  1581</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t_1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>hypo <span class="sc">|&gt;</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sum
+1  29</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t_2</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>hypo <span class="sc">|&gt;</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sum
+1 648</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t_3</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>hypo <span class="sc">|&gt;</span> <span class="fu">filter</span>(cluster <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   sum
+1 4066</code></pre>
+</div>
+</div>
+<p>$$</p>
+<p>S_{(t)}^2 = <em>{i=1}^{3} \ S</em>{(t)}^2 = + + \</p>
+<p>$$</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(((<span class="dv">29-1581</span>)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span> (((<span class="dv">648-1581</span>)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span> (((<span class="dv">4066-1581</span>)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4727209</code></pre>
+</div>
+</div>
+<p>$$</p>
+<p>S_{(t)}^2 = 4,727,209 \</p>
+<p>Var() = \</p>
+<p>Var() = 3<sup>2(1-)4727209</sup>2 $$</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">9</span><span class="sc">*</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">*</span>(<span class="dv">4727209</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28363254</code></pre>
+</div>
+</div>
+<p>$$</p>
+<p>Var() = 28,363,254</p>
+<p>$$</p>
+</section>
+<section id="b.-2" class="level3">
+<h3 class="anchored" data-anchor-id="b.-2">b.</h3>
+<p>$$</p>
+<p>Var() = \</p>
+<p>Var() = \</p>
+<p>S^2 = _{i=1}<sup>{N}(y_i-{Y})</sup>2</p>
+<p>$$</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>hypo <span class="ot">=</span> hypo <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Y_bar =</span> <span class="fu">sum</span>(y)<span class="sc">/</span><span class="dv">30</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">diff =</span> (y<span class="sc">-</span>Y_bar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>hypo </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   cluster   y Y_bar     diff
+1        1   3 158.1 24056.01
+2        1   2 158.1 24367.21
+3        1   4 158.1 23746.81
+4        1   3 158.1 24056.01
+5        1   3 158.1 24056.01
+6        1   2 158.1 24367.21
+7        1   4 158.1 23746.81
+8        1   5 158.1 23439.61
+9        1   2 158.1 24367.21
+10       1   1 158.1 24680.41
+11       2  60 158.1  9623.61
+12       2  62 158.1  9235.21
+13       2  64 158.1  8854.81
+14       2  65 158.1  8667.61
+15       2  62 158.1  9235.21
+16       2  67 158.1  8299.21
+17       2  71 158.1  7586.41
+18       2  72 158.1  7413.21
+19       2  63 158.1  9044.01
+20       2  62 158.1  9235.21
+21       3 404 158.1 60466.81
+22       3 406 158.1 61454.41
+23       3 403 158.1 59976.01
+24       3 410 158.1 63453.61
+25       3 410 158.1 63453.61
+26       3 409 158.1 62950.81
+27       3 412 158.1 64465.21
+28       3 402 158.1 59487.21
+29       3 404 158.1 60466.81
+30       3 406 158.1 61454.41</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>hypo <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">S_2 =</span> <span class="fu">sum</span>(diff)<span class="sc">/</span><span class="dv">29</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       S_2
+1 32610.58</code></pre>
+</div>
+</div>
+<p>$$</p>
+<p>S^2 = _{i=1}<sup>{30}(y_i-158.1)</sup>2 \</p>
+<p>S^2 = 32610.58 \</p>
+<p>Var() = </p>
+<p>$$</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">30</span><span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">*</span>(<span class="fl">32610.58</span>)<span class="sc">/</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1956635</code></pre>
+</div>
+</div>
+<p>$$</p>
+<p>Var() = 1,956,635</p>
+<p>$$</p>
+</section>
+<section id="c.-2" class="level3">
+<h3 class="anchored" data-anchor-id="c.-2">c.</h3>
+<p>The variance for the H-T estimator in the cluster sample is much greater because in our data, we can observe that each cluster each have a range of values that then vary drastically from the other clusters. This means that, when we get our estimator only using <span class="math inline">\(n=1\)</span>, i.e.&nbsp;only estimating the total from one cluster, we miss out on a majority of the range of <span class="math inline">\(y\)</span>.</p>
+<p>This is different from the SRS model because, with SRS, the random process gives us a decent chance of collecting data from each cluster, while not guaranteed but much better than missing out on most clusters entirely.</p>
+<p>Then, we can see how this is represented by looking at what is different between the two <span class="math inline">\(S^2\)</span> formulas. In the cluster sample, we see that <span class="math inline">\(S^2\)</span> has a much greater magnitude when the cluster totals deviate far from the average cluster totals, which is going to inevitably happen for this data because our clusters have egregious differences between their respective ranges of <span class="math inline">\(y\)</span>.</p>
+</section>
+<section id="d.-1" class="level3">
+<h3 class="anchored" data-anchor-id="d.-1">d.&nbsp;</h3>
+<p>For each cluster, the finite population variance</p>
+<p>$$</p>
+<p>S_h^2=<em>{i=1}^{N_h}(y</em>{hi}-{Y}<em>h)^2, \ {Y}<em>h=</em>{i=1}^{N_h} y</em>{hi}</p>
+<p>$$</p>
+<p>So, first we compute our finite population variances:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fin_pop_var <span class="ot">=</span> hypo <span class="sc">|&gt;</span> <span class="fu">group_by</span>(cluster) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">strat_avg =</span> <span class="fu">mean</span>(y)) <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">strat_var =</span> <span class="fu">sum</span>(((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">9</span>)) <span class="sc">|&gt;</span> <span class="fu">select</span>(cluster, strat_var)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>fin_pop_var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  cluster strat_var
+    &lt;int&gt;     &lt;dbl&gt;
+1       1      1.43
+2       2     16.2 
+3       3     11.8 </code></pre>
+</div>
+</div>
+<p>Using formula, <span class="math inline">\(Var(\hat{t_y}) = \sum_{h = 1}^{H} N_h^2 (1 - \frac{n_h}{N_h})\frac{S_h^2}{n_h}\)</span>,</p>
+<p><span class="math display">\[
+Var(\hat{t_y}) = \sum_{h = 1}^{3} 10^2 (1 - \frac{3}{10})\frac{S_h^2}{3} \\
+= 10^2 (1 - \frac{3}{10})\frac{1.4\bar{3}}{3}  + 10^2 (1 - \frac{3}{10})\frac{16.1\bar{7}}{3}  + 10^2 (1 - \frac{3}{10})\frac{11.8\bar{2}}{3}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fin_pop_var <span class="sc">|&gt;</span> <span class="fu">summarize</span>(<span class="at">var =</span> <span class="fu">sum</span>((<span class="dv">70</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">*</span>(strat_var)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+    var
+  &lt;dbl&gt;
+1  687.</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+Var(\hat{t_y}) = 686.\bar{7}
+\]</span> ### e.</p>
+<p>Our population consists of these three equally sized groups, called clusters, that are densely concentrated at 3 points. The first cluster’s y values are centered around ~3, the second around ~65, and the third around ~407. Each cluster’s y values are spaced far apart from each other, meaning that the total population has a wide variety of y values. However, if we want to make more consistent estimates of the total value for y in the population, we can use the fact that each of the groupings of y are consistently centered around a value. If we take a small sample from each group, we are more likely to get similar totals from each group to then estimate our population total. This is different than if we were to neglect the groupings, because then we would be assuming that the groups are similar when they are actually very different.</p>
+</section>
+</section>
+<section id="section-2" class="level1">
+<h1>4.</h1>
+<p>When comparing the correct theoretical formula, $$ Var() = ; \ S_{(t)}^2 = _{i=1}^{N} \</p>
+<p><span class="math display">\[
+or--
+\]</span> Var() = ; \ S_{(t)}^2 = _{i=1}^{3} \</p>
+<p><span class="math display">\[
+to the friend's estimated variance
+\]</span> () = </p>
+<p>$$ we know that the friend will consistently have an underestimate of the variance. This is because their <span class="math inline">\(s^2\)</span>’s estimates are calculated using only the data collected from sampling one cluster. However, as we already established, the clusters are drastically different and have largely varying totals between them. Therefore, the friend is missing any variance between clusters, which was the main contributor to our theoretical variance.</p>
+<p>We can confirm this by checking the different possibilities for the friend’s variance estimates using our within-cluster variances from before:</p>
+<ul>
+<li>Cluster 1: <span class="math inline">\(\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})1.43}{10} = 86\)</span></li>
+<li>Cluster 2: <span class="math inline">\(\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})16.17}{10} = 970\)</span></li>
+<li>Cluster 3: <span class="math inline">\(\hat{Var}(\hat{t_y}) = \frac{30^2 (1 - \frac{10}{30})11.82}{10} = 709.\bar{3}\)</span>,</li>
+</ul>
+<p>which are all egregiously under our theoretical variance.</p>
+</section>
+<section id="section-3" class="level1">
+<h1>5.</h1>
+<p>Let <span class="math inline">\(I_i\)</span> be the indicator that individual <span class="math inline">\(i\)</span> is included in the sample. Then</p>
+<p><span class="math display">\[
+I_i =
+\begin{cases}
+1, &amp; \text{if individual } i \text{ is sampled},\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>The modified estimator is</p>
+<p><span class="math display">\[
+\widehat{t}_y^*
+=
+\sum_{i\neq i^*}\frac{I_i y_i}{p_i}
++
+I_{i^*}w^*y_{i^*}.
+\]</span></p>
+<p>Taking the expected value gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+E\left(\widehat{t}_y^*\right)
+&amp;=
+E\left(
+\sum_{i\neq i^*}\frac{I_i y_i}{p_i}
++
+I_{i^*}w^*y_{i^*}
+\right)\\
+&amp;=
+\sum_{i\neq i^*}
+\frac{E(I_i)y_i}{p_i}
++
+E(I_{i^*})w^*y_{i^*}.
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(E(I_i)=p_i\)</span> for every individual,</p>
+<p><span class="math display">\[
+\begin{aligned}
+E\left(\widehat{t}_y^*\right)
+&amp;=
+\sum_{i\neq i^*}
+\frac{p_i y_i}{p_i}
++
+p_{i^*}w^*y_{i^*}\\
+&amp;=
+\sum_{i\neq i^*}y_i
++
+p_{i^*}w^*y_{i^*}.
+\end{aligned}
+\]</span></p>
+<p>The true population total is</p>
+<p><span class="math display">\[
+t_y
+=
+\sum_{i\neq i^*}y_i+y_{i^*}.
+\]</span></p>
+<p>Therefore, the bias is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Bias}\left(\widehat{t}_y^*\right)
+&amp;=
+E\left(\widehat{t}_y^*\right)-t_y\\
+&amp;=
+\left[
+\sum_{i\neq i^*}y_i
++
+p_{i^*}w^*y_{i^*}
+\right]
+-
+\left[
+\sum_{i\neq i^*}y_i+y_{i^*}
+\right]\\
+&amp;=
+p_{i^*}w^*y_{i^*}-y_{i^*}\\
+&amp;=
+\left(p_{i^*}w^*-1\right)y_{i^*}.
+\end{aligned}
+\]</span></p>
+<p>Because the original Horvitz–Thompson weight is</p>
+<p><span class="math display">\[
+w_{i^*}=\frac{1}{p_{i^*}},
+\]</span></p>
+<p>we can also write the bias as</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Bias}\left(\widehat{t}_y^*\right)
+=
+\left(\frac{w^*}{w_{i^*}}-1\right)y_{i^*}
+}.
+\]</span></p>
+<p>Since <span class="math inline">\(w^*&lt;w_{i^*}\)</span>, the bias is negative whenever <span class="math inline">\(y_{i^*}&gt;0\)</span>. Therefore, the trimmed estimator is biased downward.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
