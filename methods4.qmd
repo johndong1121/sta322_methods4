@@ -17,6 +17,7 @@ library(survey)
 ### a.
 
 The number of words on each page are as follows:
+
 - $M_1 = 60$
 
 - $M_2 = 69$
@@ -188,9 +189,9 @@ des2 = svydesign(~journal_id, weights = ~wt, fpc = ~N,data = journal) #only one 
 non_prob_prop <- svyratio(numerator = ~nonprob, denominator = ~numemp, design = des2)
 
 non_prob_prop
-SE(non_prob_prop)
-
 ```
+ 
+We get an estimated proportion of 0.926 for the proportion of social/behavioral journal studies that use nonprobability sampling with a standard error of 0.034.
 
 ### c. 
 
@@ -342,7 +343,11 @@ So, first we compute our finite population variances:
 ```{r}
 #| label: 3d-s-2
 
-fin_pop_var = hypo |> group_by(cluster) |> mutate(strat_avg = mean(y)) |> summarize(strat_var = sum(((y - mean(y))^2)/9)) |> select(cluster, strat_var)
+fin_pop_var = hypo |> 
+  group_by(cluster) |> 
+  mutate(strat_avg = mean(y)) |> 
+  summarize(strat_var = sum(((y - mean(y))^2)/9)) |> 
+  select(cluster, strat_var)
 
 fin_pop_var
 ```
@@ -363,6 +368,7 @@ fin_pop_var |> summarize(var = sum((70/3)*(strat_var)))
 $$
 Var(\hat{t_y}) = 686.\bar{7}
 $$
+
 ### e.
 
 Our population consists of these three equally sized groups, called clusters, that are densely concentrated at 3 points. The first cluster's y values are centered around ~3, the second around ~65, and the third around ~407. Each cluster's y values are spaced far apart from each other, meaning that the total population has a wide variety of y values. However, if we want to make more consistent estimates of the total value for y in the population, we can use the fact that each of the groupings of y are consistently centered around a value. If we take a small sample from each group, we are more likely to get similar totals from each group to then estimate our population total. This is different than if we were to neglect the groupings, because then we would be assuming that the groups are similar when they are actually very different.
@@ -400,3 +406,44 @@ We can confirm this by checking the different possibilities for the friend's var
 which are all egregiously under our theoretical variance.
 
 # 5.
+
+We have to check the expected value for the new estimator:
+
+$$
+\mathbb{E}[\hat{t_y^*}] = \mathbb{E}[\sum_{i \in S, i \neq i^*}w_iy_i + wy_{i^*}]
+$$
+
+$$
+= \sum_{i \in \mathcal{U}, i \neq i^*}\mathbb{E}[w_iy_iI_i] + \mathbb{E}[wy_{i^*}I_{i^*}]
+$$
+
+$$
+= \sum_{i \in \mathcal{U}}w_iy_i\mathbb{E}[I_i] - w_{i^*}y_{i^*}\mathbb{E}[I_{i^*}] + wy_{i^*}\mathbb{E}[I_{i^*}]
+$$
+
+$$
+= \sum_{i \in \mathcal{U}}w_iy_ip_i - w_{i^*}y_{i^*}p_{i^*} + wy_{i^*}p_{i^*}
+$$
+
+
+$$
+= \sum_{i \in \mathcal{U}}\frac{1}{p_i}y_ip_i - \frac{1}{p_{i^*}}y_{i^*}p_{i^*} + wy_{i^*}p_{i^*}
+$$
+
+$$
+= \sum_{i \in \mathcal{U}}y_i + y_{i^*}(wp_{i^*}-1)
+$$
+
+
+
+$$
+\mathbb{E}[\hat{t_y^*}] = t_y + y_{i^*}(wp_{i^*}-1) = t_y + y_{i^*}(\frac{w}{w_{i^*}}-1)
+$$
+
+Therefore, the estimator is biased, because the expected value can only come out to $t_y$ if the weights $w$ and $w_{i^*}$ are equal, which they're not. So, the bias is
+
+$$
+Bias = \mathbb{E}[\hat{t_y^*}] - t_y = y_{i^*}(\frac{w}{w_{i^*}}-1)
+$$
+
+And we know that the bias is negative because $w<w_{i^*}$.
